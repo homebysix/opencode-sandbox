@@ -19,6 +19,7 @@ oc() {
     -v "$cfg":"$cfg":ro
     -v "$PWD":/workspace
     -v "$HOME/.config/opencode":"$HOME/.config/opencode":ro
+    -v "$HOME/.local/state/opencode":"$HOME/.local/state/opencode":ro
   )
   [[ -d "$ponytail" ]] && mounts+=(-v "$ponytail":"$ponytail":ro)
 
