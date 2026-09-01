@@ -4,6 +4,10 @@
     "edit": "allow",
     "bash": "allow",
     "webfetch": "allow",
-    "websearch": "allow"
+    "websearch": "allow",
+    "external_directory": {
+      "/etc/**": "allow",
+      "/tmp/**": "allow"
+    }
   }
 }

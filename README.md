@@ -31,7 +31,7 @@ oc run "..."       # args pass straight through
 
 ## Permissions
 
-Permissions are configured in `opencode.json`. The sandbox layers `sandbox.json` (everything `allow`) over your global config via `OPENCODE_CONFIG`, so the container runs full-permission while your host config keeps its `ask`/`deny` guardrails.
+Permissions are configured in `opencode.json`. The sandbox layers `sandbox.json` (everything `allow`) over your global config via `OPENCODE_CONFIG`, so the container runs full-permission while your host config keeps its `ask`/`deny` guardrails. `external_directory` defaults to `ask`, which is what prompts on paths outside `/workspace` — `sandbox.json` allows the container's own `/etc` and `/tmp` so those never prompt.
 
 Check the merged result anytime (from this repo):
 
