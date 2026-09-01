@@ -1,4 +1,4 @@
-FROM node:22-slim
+FROM node:24-slim
 
 # Core tools. Python's from Debian (3.11 on bookworm) — sits fine alongside the
 # Node opencode needs, so no separate base image.
