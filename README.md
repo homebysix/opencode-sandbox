@@ -39,7 +39,8 @@ Check the merged result anytime (from this repo):
 docker run --rm -e HOME="$HOME" \
   -e OPENCODE_CONFIG="$PWD/sandbox.json" \
   -v "$PWD/sandbox.json":"$PWD/sandbox.json":ro \
-  -v "$HOME/.config/opencode":"$HOME/.config/opencode" \
+  -v "$HOME/.config/opencode":"$HOME/.config/opencode":ro \
+  -v "$HOME/.local/state/opencode":"$HOME/.local/state/opencode":ro \
   opencode-sandbox debug config | jq .permission
 ```
 
