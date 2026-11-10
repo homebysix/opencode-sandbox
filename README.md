@@ -17,22 +17,13 @@ You bring your own `~/.config/opencode/opencode.json` with a provider pointing a
 
 ### pi setup
 
-`ocpi` never mounts the host's `~/.pi/agent` (it may hold credentials or a company wrapper). Instead, put a pi [`models.json`](https://pi.dev/schemas/models.schema.json) for your LLM at `~/.config/pi-sandbox/models.json` (or set `PI_SANDBOX_MODELS`):
+`ocpi` reads your **real** `~/.pi/agent` configuration **read-only** — no copy needed. It overlays your `models.json`, `settings.json`, and (if present) `auth.json` into a throwaway writable volume so pi can still drop its per-run lock files and sessions there, without ever writing to your host files.
 
-```json
-{
-  "providers": {
-    "omlx": {
-      "baseUrl": "http://<llm-host>:8080/v1",
-      "api": "openai-completions",
-      "apiKey": "not-needed",
-      "models": [{ "id": "Qwen3.6-35B-A3B-MLX-6bit", "contextWindow": 262144, "maxTokens": 8192 }]
-    }
-  }
-}
-```
+(pi can't run against a fully read-only `~/.pi/agent` — it has to create a `trust.json.lock` and a session dir — so those go into the writable `pi-sandbox-agent` volume plus `/tmp`. Everything else on your Mac stays unmounted and untouched.)
 
 On first run, pick the model with `/model` and press `Ctrl+S` to save it as the default. That lands in the `pi-sandbox-agent` volume and sticks across runs.
+
+Want a different config? Point `PI_SANDBOX_AGENT` at another agent dir. If you ever can't find your LLM models inside `ocpi`, run `/model` and pick one — the read-only host `models.json` is always the source of truth.
 
 ## Use
 
